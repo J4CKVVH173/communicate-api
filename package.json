@@ -2,11 +2,30 @@
   "name": "communicate-api",
   "version": "0.9.1",
   "description": "Api to communicate react frontend apps with django backend",
-  "main": "index.js",
+  "main": "build/index.js",
   "repository": "https://github.com/J4CKVVH173/communicate-api.git",
   "author": "Andrey <i78901234567890@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "api",
+    "django",
+    "django_react"
+  ],
+  "scripts": {
+    "start": "babel-watch src/index.js",
+    "build": "babel src --out-dir build"
+  },
   "dependencies": {
     "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "babel-plugin-extensible-destructuring": "^4.3.1",
+    "babel-watch": "^7.0.0"
   }
 }
