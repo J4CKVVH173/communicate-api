@@ -7,7 +7,7 @@ interface ICommunicate {
     utils: Utils,
     session: AxiosInstance,
 
-    definitionBaseUrl(dev: string | undefined, prod: string | undefined): string
+    definitionBaseUrl(dev?: string, prod?: string): string
 }
 
 interface IUserConfig {
@@ -58,7 +58,7 @@ export default class Communicate implements ICommunicate {
      * @param dev - урл для девелопа который передан как конфиг от разработчика
      * @param prod - урл продакшена который передан как конфиг от разрабочтика
      */
-    definitionBaseUrl(dev, prod) {
+    definitionBaseUrl(dev?: string, prod?: string) {
         let baseUrl;
         if (process.env.NODE_ENV === 'production') {
             baseUrl = prod || this.utils.productionUrl;
