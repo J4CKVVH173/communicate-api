@@ -1,6 +1,6 @@
 {
   "name": "communicate-api",
-  "version": "0.9.25",
+  "version": "0.10.0",
   "description": "Api to communicate react frontend apps with django backend",
   "main": "build/index.js",
   "repository": "https://github.com/J4CKVVH173/communicate-api.git",
