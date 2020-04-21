@@ -1,8 +1,8 @@
 {
   "name": "communicate-api",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Api to communicate react frontend apps with django backend",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/J4CKVVH173/communicate-api.git",
   "author": "Andrey <i78901234567890@gmail.com>",
   "license": "MIT",
@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "start": "babel-watch src/index.js",
-    "build": "babel src --out-dir build"
+    "build": "babel src --out-dir dist"
   },
   "dependencies": {
     "axios": "^0.19.2"
