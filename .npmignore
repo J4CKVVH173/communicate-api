@@ -107,3 +107,6 @@ typings/
 .babelrc
 src
 .idea
+index.ts
+tsconfig.json
+!build/src

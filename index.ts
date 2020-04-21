@@ -1,3 +1,3 @@
-import Communicate from "./communicate/communicate";
+import Communicate from "./src/communicate";
 
 export default Communicate;
