@@ -5,7 +5,7 @@ interface ICommunicate {
     session: AxiosInstance,
 }
 
-interface IUserConfig extends AxiosRequestConfig{
+export interface IUserConfig extends AxiosRequestConfig{
     devUrl?: string,
     prodUrl?: string
 }
@@ -30,11 +30,6 @@ export default class Communicate implements ICommunicate {
         const baseURL = this.definitionBaseUrl(devUrl, prodUrl);
         // добавляем в аргумент функции заголовки
         const resultHeaders = {...this.defaultHeaders, ...headers};
-        console.log({
-            baseURL,
-            ...this.defaultConfig, ...userConfig,
-            headers: resultHeaders,
-        })
         // При передаче конфига в axios.create важно соблюдать порядок распаковки. Сперва распаковывается дефолтный конфиг
         // и уже на него накладывается новый
         this.session = axios.create({

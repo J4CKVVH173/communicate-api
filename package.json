@@ -7,6 +7,7 @@
   "repository": "https://github.com/J4CKVVH173/communicate-api.git",
   "author": "Andrey <i78901234567890@gmail.com>",
   "license": "MIT",
+  "type": "moule",
   "keywords": [
     "react",
     "api",
@@ -14,7 +15,7 @@
     "django_react"
   ],
   "scripts": {
-    "start": "babel-watch index.ts --extensions \\\".ts\\\"",
+    "start": "babel-watch index.ts --extensions \".ts,.tsx\"",
     "build": "tsc -b"
   },
   "dependencies": {
