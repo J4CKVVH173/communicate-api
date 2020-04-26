@@ -1,6 +1,6 @@
 {
   "name": "communicate-api",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Api to communicate react frontend apps with django backend",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -12,7 +12,9 @@
     "react",
     "api",
     "django",
-    "django_react"
+    "django-rest-framework",
+    "django-rest",
+    "drf"
   ],
   "scripts": {
     "start": "babel-watch index.ts --extensions \".ts,.tsx\"",
