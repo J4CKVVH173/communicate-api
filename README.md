@@ -1,38 +1,49 @@
 # Communicate API
-API для взаимодействия фронта с бэком. API имеет ряд дефолтных настроект  которые чаще всего используются
-в наших проектах.
 
-## Использование
-Модуль предоставляет доступ к классу `Communicate`, объекты которого содержат поле `session`. Данное
-поле является экземпляром `AxiosInstance`, с набором переданных или дефолтных настроек, соответсвенно поле `session`
-поддерживает все методы что и объект `axios`.
+API to communicate frontend with backend. `Communicate API` is a wrapper over `axios` package with default
+request settings for `AxiosInstance` out of the box.
 
-Каждый новый объект класса Communicate создает новую, независимую сессию.
 
-### Передача настроек
-При создании объекта класса `Communicate` можно переопределить или расширить дефолтные настройки путем
-передачи в конструктор класса объекта, содержащим необходимые настройки. Объект может содержать
-все те же настройки, что поддерживает `AxiosInstance`, с их списком можно ознакомиться в документации
-или исходниках `axios`.
+## Use
+The module provides access to the `Communicate` class, whose instance contains the session filed. This field
+has `AxiosInstance` with default or passed request settings. The `session` field supports all methods that `axios`
+instance supports.
 
-Но есть ряд кастомных настроек.
+#### Example
 
-## Версия 1.0.*
+```javascript
+import Communicate from 'communicate-api';
+const djangoSession = new Communicate();
+djangoSession.session.get('/some/path');
+```
 
-### Кастомные настройки
+### Pass settings
+When creating the instance of `Communicate` you can redefine or extend default settings via passing custom
+settings to `Communicate` constructor. Custom settings can contain all the same settings that `axios` supports.
+ [Axios request config](https://github.com/axios/axios#request-config).
 
-#### Определение baseURL
+Also the `Communicate` has extra settings.
 
-В зависимости от того, на девелоперской машине или машине продакшена запускается приложение, под капотом
-автоматически определяется какой `baseURL` будет использован. По умолчанию для девелопа используется
-`localhost:8000`, а для продакшена используется имя домена. Если необходимо определить другой `baseURL`,
-необходимо в конструктор `Communicate`, в объект настроек, добавить значения под ключем `devUrl` или
-`prodUrl`. Первый определяет `baseURL`, для своего объекта класса, для девелоперской машины, а второй
-для машины продакшена.
+## V.1.0.*
 
-### Дефолтные настройки
+### `Communicate` extra settings
 
-`axios`:
+#### baseUrl
+
+Package determines on what computer the application is running via `NODE_ENV`. In case if
+`NODE_ENV` equal `production` the app will use `<sheme>://<domaine>` as default baseURL.
+Otherwise by default baseURL is `http://localhost:8000`. If
+you need to define a different `baseURL` for developer machine or production you need to add the value to `devUrl` key
+or `prodUrl` key or both in the custom settings object.
+
+#### Example
+```javascript
+const customSettings = { devUrl: 'http//127.0.0.1:5000', ...axiosSettings };
+const djangoSession = new Communicate(customSettings);
+```
+
+### Default axios settings
+
 ```
 {
     baseURL: (develop) 'localhost:8000' | (production) <scheme>://<domain>
@@ -44,3 +55,4 @@ API для взаимодействия фронта с бэком. API имее
     }
 }
 ```
+ 
