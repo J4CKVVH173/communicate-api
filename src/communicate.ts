@@ -28,10 +28,10 @@ export default class Communicate implements ICommunicate {
     constructor(userConfig?: IUserConfig) {
         const {devUrl, prodUrl, headers} = {...userConfig};
         const baseURL = this.definitionBaseUrl(devUrl, prodUrl);
-        // добавляем в аргумент функции заголовки
+        // add headers to argument of function
         const resultHeaders = {...this.defaultHeaders, ...headers};
-        // При передаче конфига в axios.create важно соблюдать порядок распаковки. Сперва распаковывается дефолтный конфиг
-        // и уже на него накладывается новый
+        // It's important to save spread/unpacked order. First the default settings are unpacked and then customs.
+        // This is done for a higher priority of custom settings.
         this.session = axios.create({
             baseURL,
             ...this.defaultConfig, ...userConfig,
@@ -40,9 +40,9 @@ export default class Communicate implements ICommunicate {
     }
 
     /**
-     * Метод для определения урла, на который будут производиться запросы.
-     * @param dev - урл для девелопа который передан как конфиг от разработчика
-     * @param prod - урл продакшена который передан как конфиг от разрабочтика
+     * Method for determining the base url for develop and prod machine.
+     * @param dev - url for develop passed like custom config
+     * @param prod - url for production passed like custom config
      */
     private definitionBaseUrl(dev?: string, prod?: string) {
         let baseUrl;

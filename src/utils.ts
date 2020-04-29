@@ -1,15 +1,15 @@
 /**
- * Класс со вспомогательными утилитами для настройки сессии.
+ * Class with helpful methods to configure the session.
  */
 export default class Utils {
 
     /**
-     * Дефолтный урл для запросов на машине разработчика.
+     * Default baseURL for request on dev machine.
      */
     developerUrl = 'http://localhost:8000';
 
     /**
-     * Геттер для получения урла без пути, по которому нужно делать запрос на продакшене.
+     * Getter for default baseURL on production machine.
      */
     get productionUrl(): string {
         return window.location.protocol + '//' + window.location.host;
