@@ -28,10 +28,11 @@ export default class Communicate implements ICommunicate {
     constructor(userConfig?: IUserConfig) {
         const {devUrl, prodUrl, headers} = {...userConfig};
         const baseURL = this.definitionBaseUrl(devUrl, prodUrl);
-        // add headers to argument of function
+        // preparation headers to argument of function
         const resultHeaders = {...this.defaultHeaders, ...headers};
-        // It's important to save spread/unpacked order. First the default settings are unpacked and then customs.
-        // This is done for a higher priority of custom settings.
+        // It's important to save spread order. First the default settings are unpacked and then customs.
+        // This is done for a higher priority of custom settings. header arg must be last, bcs userConfig
+        // may contain header arg too and userConfig args can rewrite default headers
         this.session = axios.create({
             baseURL,
             ...this.defaultConfig, ...userConfig,
