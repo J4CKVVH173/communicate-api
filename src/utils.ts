@@ -21,8 +21,7 @@ export default class Utils {
   joinPath(...rest: string[]): string {
     if (rest.length === 1) return rest[0];
     if (rest.length === 0) throw Error("Method joinPath does not accept an empty array");
-    console.log(rest);
-    if (rest[0].substr(rest.length - 1) === '/') return this.joinPath(rest[0] + rest[1], ...rest.splice(2));
+    if (rest[0].substr(rest[0].length - 1) === '/') return this.joinPath(rest[0] + rest[1], ...rest.splice(2));
     else return this.joinPath(rest[0] + '/' + rest[1], ...rest.slice(2));
   }
 }
