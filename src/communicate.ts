@@ -8,6 +8,8 @@ interface ICommunicate {
 export interface IUserConfig extends AxiosRequestConfig {
   devUrl?: string;
   prodUrl?: string;
+  baseUrlDevPostfix ?: string;
+  baseUrlProdPostfix ?: string;
 }
 
 export default class Communicate implements ICommunicate {
@@ -26,8 +28,9 @@ export default class Communicate implements ICommunicate {
   session: AxiosInstance;
 
   constructor(userConfig?: IUserConfig) {
-    const { devUrl, prodUrl, headers } = { ...userConfig };
-    const baseURL = this.definitionBaseUrl(devUrl, prodUrl);
+    const { devUrl, prodUrl, headers, baseUrlDevPostfix, baseUrlProdPostfix } = { ...userConfig };
+    let baseURL = this.definitionBaseUrl(devUrl, prodUrl);
+    baseURL = this.setPathPrefix(baseURL, baseUrlDevPostfix, baseUrlProdPostfix);
     // preparation headers to argument of function
     const resultHeaders = { ...this.defaultHeaders, ...headers };
     // It's important to save spread order. First the default settings are unpacked and then customs.
@@ -46,12 +49,30 @@ export default class Communicate implements ICommunicate {
    * @param dev - url for develop passed like custom config
    * @param prod - url for production passed like custom config
    */
-  private definitionBaseUrl(dev?: string, prod?: string) {
+  private definitionBaseUrl(dev?: string, prod?: string): string {
     let baseUrl;
     if (process.env.NODE_ENV === 'production') {
       baseUrl = prod || this.utils.productionUrl;
     } else {
       baseUrl = dev || this.utils.developerUrl;
+    }
+    return baseUrl;
+  }
+
+  /**
+   * Method set base url, if it is passed
+   * @param url - base url
+   * @param prefixDev - base url prefix in developer mode
+   * @param prefixProd - base url prefix in production mode
+   */
+  private setPathPrefix(url: string, prefixDev?: string, prefixProd?: string): string {
+    let baseUrl: string = url;
+    if (process.env.NODE_ENV === 'production' && prefixProd) {
+      baseUrl = this.utils.joinPath(url, prefixProd);
+    } else {
+      if (prefixDev) {
+        baseUrl = this.utils.joinPath(url, prefixDev);
+      }
     }
     return baseUrl;
   }
