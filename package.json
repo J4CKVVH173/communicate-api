@@ -1,6 +1,6 @@
 {
   "name": "communicate-api",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Api to communicate react frontend apps with django backend",
   "main": "build/index.js",
   "types": "build/index.d.ts",
